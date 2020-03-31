@@ -33,6 +33,9 @@
     "url": "https://github.com/giridharangm/react-media-recorder/issues"
   },
   "homepage": "https://github.com/giridharangm/react-media-recorder#readme",
+  "peerdependencies": {
+    "react": "*"
+  },
   "devDependencies": {
     "@types/dom-mediacapture-record": "^1.0.2",
     "@types/node": "^12.12.11",
