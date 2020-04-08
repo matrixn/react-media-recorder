@@ -5,8 +5,6 @@ declare type ReactMediaRecorderRenderProps = {
     muteAudio: () => void;
     unMuteAudio: () => void;
     startRecording: () => void;
-    pauseRecording: () => void;
-    resumeRecording: () => void;
     stopRecording: () => void;
     mediaBlobUrl: null | string;
     status: StatusMessages;
@@ -22,6 +20,6 @@ declare type ReactMediaRecorderProps = {
     blobPropertyBag?: BlobPropertyBag;
     mediaRecorderOptions?: MediaRecorderOptions | null;
 };
-declare type StatusMessages = "media_aborted" | "permission_denied" | "no_specified_media_found" | "media_in_use" | "invalid_media_constraints" | "no_constraints" | "recorder_error" | "idle" | "acquiring_media" | "delayed_start" | "recording" | "stopping" | "stopped";
+declare type StatusMessages = "idle" | "acquiring_media" | "recording" | "stopping" | "stopped";
 export declare const ReactMediaRecorder: ({ render, audio, video, onStop, blobPropertyBag, screen, mediaRecorderOptions }: ReactMediaRecorderProps) => ReactElement<any, string | ((props: any) => ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>;
 export {};

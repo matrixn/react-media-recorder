@@ -5,8 +5,6 @@ type ReactMediaRecorderRenderProps = {
   muteAudio: () => void;
   unMuteAudio: () => void;
   startRecording: () => void;
-  pauseRecording: () => void;
-  resumeRecording: () => void;
   stopRecording: () => void;
   mediaBlobUrl: null | string;
   status: StatusMessages;
@@ -25,16 +23,8 @@ type ReactMediaRecorderProps = {
 };
 
 type StatusMessages =
-  | "media_aborted"
-  | "permission_denied"
-  | "no_specified_media_found"
-  | "media_in_use"
-  | "invalid_media_constraints"
-  | "no_constraints"
-  | "recorder_error"
   | "idle"
   | "acquiring_media"
-  | "delayed_start"
   | "recording"
   | "stopping"
   | "stopped";
@@ -162,6 +152,8 @@ export const ReactMediaRecorder = ({
       await getMediaStream();
     }
     if (mediaStream.current) {
+      mediaChunks.current = [];
+      setMediaBlobUrl(null);
       mediaRecorder.current = new MediaRecorder(mediaStream.current);
       mediaRecorder.current.ondataavailable = onRecordingActive;
       mediaRecorder.current.onstop = onRecordingStop;
@@ -183,7 +175,6 @@ export const ReactMediaRecorder = ({
       blobPropertyBag || video ? { type: "video/mp4" } : { type: "audio/wav" };
     const blob = new Blob(mediaChunks.current, blobProperty);
     const url = URL.createObjectURL(blob);
-    mediaChunks.current = [];
     setStatus("stopped");
     setMediaBlobUrl(url);
     onStop(url);
@@ -195,17 +186,6 @@ export const ReactMediaRecorder = ({
       mediaStream.current
         .getAudioTracks()
         .forEach(audioTrack => (audioTrack.enabled = !mute));
-    }
-  };
-
-  const pauseRecording = () => {
-    if (mediaRecorder.current && mediaRecorder.current.state === "recording") {
-      mediaRecorder.current.pause();
-    }
-  };
-  const resumeRecording = () => {
-    if (mediaRecorder.current && mediaRecorder.current.state === "paused") {
-      mediaRecorder.current.resume();
     }
   };
 
@@ -221,8 +201,6 @@ export const ReactMediaRecorder = ({
     muteAudio: () => muteAudio(true),
     unMuteAudio: () => muteAudio(false),
     startRecording,
-    pauseRecording,
-    resumeRecording,
     stopRecording,
     mediaBlobUrl,
     status,
