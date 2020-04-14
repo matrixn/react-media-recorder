@@ -1,5 +1,5 @@
 /// <reference types="dom-mediacapture-record" />
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 declare type ReactMediaRecorderRenderProps = {
     error: string;
     muteAudio: () => void;
@@ -20,6 +20,6 @@ declare type ReactMediaRecorderProps = {
     blobPropertyBag?: BlobPropertyBag;
     mediaRecorderOptions?: MediaRecorderOptions | null;
 };
-declare type StatusMessages = "idle" | "acquiring_media" | "recording" | "stopping" | "stopped";
-export declare const ReactMediaRecorder: ({ render, audio, video, onStop, blobPropertyBag, screen, mediaRecorderOptions }: ReactMediaRecorderProps) => ReactElement<any, string | ((props: any) => ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>;
+declare type StatusMessages = 'idle' | 'acquiring_media' | 'recording' | 'stopping' | 'stopped';
+export declare const ReactMediaRecorder: ({ render, audio, video, onStop, blobPropertyBag, screen, mediaRecorderOptions, }: ReactMediaRecorderProps) => ReactElement<any, string | ((props: any) => ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>;
 export {};
