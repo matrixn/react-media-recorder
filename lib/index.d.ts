@@ -7,6 +7,7 @@ declare type ReactMediaRecorderRenderProps = {
     startRecording: () => void;
     stopRecording: () => void;
     mediaBlobUrl: null | string;
+    mediaBlob: Blob | null;
     status: StatusMessages;
     isAudioMuted: boolean;
     previewStream: MediaStream | null;
