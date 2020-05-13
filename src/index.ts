@@ -180,6 +180,9 @@ export const ReactMediaRecorder = ({
   }
 
   const stopRecording = () => {
+    console.log("Media Recorder Data:");
+    console.log(mediaRecorder);
+    console.log(mediaRecorder.current);
     if (mediaRecorder.current) {
       setStatus('stopping')
       mediaRecorder.current.stop()
