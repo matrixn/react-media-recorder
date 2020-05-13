@@ -1,19 +1,19 @@
 /// <reference types="dom-mediacapture-record" />
-import { ReactElement } from 'react';
-declare type ReactMediaRecorderRenderProps = {
+declare type ReactMediaRecorderHook = {
     error: string;
     muteAudio: () => void;
     unMuteAudio: () => void;
     startRecording: () => void;
+    pauseRecording: () => void;
+    resumeRecording: () => void;
     stopRecording: () => void;
-    mediaBlobUrl: null | string;
-    mediaBlob: Blob | null;
+    mediaBlobUrl?: string;
+    mediaBlob?: Blob;
     status: StatusMessages;
     isAudioMuted: boolean;
     previewStream: MediaStream | null;
 };
 declare type ReactMediaRecorderProps = {
-    render: (props: ReactMediaRecorderRenderProps) => ReactElement;
     audio?: boolean | MediaTrackConstraints;
     video?: boolean | MediaTrackConstraints;
     screen?: boolean;
@@ -21,6 +21,6 @@ declare type ReactMediaRecorderProps = {
     blobPropertyBag?: BlobPropertyBag;
     mediaRecorderOptions?: MediaRecorderOptions | null;
 };
-declare type StatusMessages = 'idle' | 'acquiring_media' | 'recording' | 'stopping' | 'stopped';
-export declare const ReactMediaRecorder: ({ render, audio, video, onStop, blobPropertyBag, screen, mediaRecorderOptions, }: ReactMediaRecorderProps) => ReactElement<any, string | ((props: any) => ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>;
+declare type StatusMessages = "media_aborted" | "permission_denied" | "no_specified_media_found" | "media_in_use" | "invalid_media_constraints" | "no_constraints" | "recorder_error" | "idle" | "acquiring_media" | "delayed_start" | "recording" | "stopping" | "stopped";
+export declare const useReactMediaRecorder: ({ audio, video, onStop, blobPropertyBag, screen, mediaRecorderOptions }: ReactMediaRecorderProps) => ReactMediaRecorderHook;
 export {};

@@ -1,6 +1,6 @@
-# react-media-recorder :o2: :video_camera: :microphone: :computer:
+# react-use-media-recorder :o2: :video_camera: :microphone: :computer:
 
-`react-media-recorder` is a fully typed react component with render prop that can be used to:
+`react-use-media-recorder` is a fully typed react component with render prop that can be used to:
 
 - Record audio/video
 - Record screen
@@ -10,25 +10,23 @@ using [MediaRecorder API](https://developer.mozilla.org/en-US/docs/Web/API/Media
 ## Installation
 
 ```
-npm i react-media-recorder
+npm i @matrixn/react-use-media-recorder
 ```
 
 or
 
 ```
-yarn add react-media-recorder
+yarn add @matrixn/react-use-media-recorder
 ```
 
 ## Usage
 
 ```javascript
-import { ReactMediaRecorder } from "react-media-recorder";
+import { useReactMediaRecorder } from "@matrixn/react-use-media-recorder";
 
-const RecordView = () => (
-  <div>
-    <ReactMediaRecorder
-      video
-      render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
+const RecordView = () => {
+    const {status, error, startRecording, stopRecording, mediaBlobUrl, mediaBlob} = useReactMediaRecorder({audio:true})
+  return (
         <div>
           <p>{status}</p>
           <button onClick={startRecording}>Start Recording</button>
@@ -41,7 +39,7 @@ const RecordView = () => (
 );
 ```
 
-Since `react-media-recording` uses render prop, you can define what to render in the view. Just don't forget to wire the `startRecording`, `stopRecording` and `mediaBlobUrl` to your component.
+Since `react-use-media-recording` uses render prop, you can define what to render in the view. Just don't forget to wire the `startRecording`, `stopRecording`, `mediaBlobUrl`, `mediaBlob` to your component.
 
 ### Options / Props
 
