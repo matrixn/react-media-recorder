@@ -23,7 +23,7 @@ type ReactMediaRecorderProps = {
   mediaRecorderOptions?: MediaRecorderOptions | null
 }
 
-type StatusMessages = 'idle' | 'acquiring_media' | 'recording' | 'stopping' | 'stopped'
+type StatusMessages = 'idle' | 'acquiring_media' | 'recording' | 'stopping' | 'stopped' | 'inactive'
 
 enum RecorderErrors {
   AbortError = 'media_aborted',
@@ -146,8 +146,9 @@ export const ReactMediaRecorder = ({
       await getMediaStream()
     }
     if (mediaStream.current) {
-      mediaChunks.current = []
       setMediaBlobUrl(null)
+      mediaChunks.current = []
+      console.log(mediaStream.current)
       mediaRecorder.current = new MediaRecorder(mediaStream.current)
       mediaRecorder.current.ondataavailable = onRecordingActive
       mediaRecorder.current.onstop = onRecordingStop
@@ -169,7 +170,7 @@ export const ReactMediaRecorder = ({
       blobPropertyBag || video ? { type: 'video/mp4' } : { type: 'audio/wav' }
     const blob = new Blob(mediaChunks.current, blobProperty)
     const url = URL.createObjectURL(blob)
-    setStatus('idle')
+    setStatus('inactive')
     setMediaBlobUrl(url)
     setMediaBlob(blob)
     onStop(url)
